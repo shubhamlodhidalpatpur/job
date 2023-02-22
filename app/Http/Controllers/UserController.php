@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -16,6 +17,12 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        return view('users.index');
+        $users= User::all();
+        return view('user.Users',compact('users'));
+    }
+    public function delete($id)
+    {
+        $users= User::find($id)->delete();
+        return redirect('/user')->with('message','User Deleted Successfully');
     }
 }
