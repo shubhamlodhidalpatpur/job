@@ -19,8 +19,7 @@ class VisitorUserController extends Controller
     public function index()
     {
         $visiter_users = DB::select('SELECT st.name,vs.fname,vs.state,vs.category,vs.mobile_number,vs.age,vs.id FROM `visitor_users` vs , `states` st WHERE vs.state=st.id');
-        return view('visitor_user.VisitorUser',['visiter_user'=>$visiter_users]);
-
+        return view('visitor_user.VisitorUser', ['visiter_user' => $visiter_users]);
     }
 
     /**
@@ -30,9 +29,9 @@ class VisitorUserController extends Controller
      */
     public function create()
     {
-        
-        $state=State::select('name','id')->where('country_id',101)->get();
-        return view('visitor_user.AddVisitorUser',['state'=>$state]);
+
+        $state = State::select('name', 'id')->where('country_id', 101)->get();
+        return view('visitor_user.AddVisitorUser', ['state' => $state]);
     }
 
     /**
@@ -45,30 +44,26 @@ class VisitorUserController extends Controller
     {
         $request->validate(
             [
-                'first_name'=>'required',
-                'password'=>'required',
-                'state'=>'required',
-                'date_of_birth'=>'required',
-                'age'=>'required',
-                'category'=>'required',
-                'mobile_number'=>'required'
+                'first_name' => 'required',
+                'password' => 'required',
+                'state' => 'required',
+                'date_of_birth' => 'required',
+                'age' => 'required',
+                'category' => 'required',
+                'mobile_number' => 'required'
 
             ]
-            );
-       $visitor_user= new VisitorUser;
-       $visitor_user->fname=$request->first_name;
-       $visitor_user->state=$request->state;
-       $visitor_user->date_of_birth=$request->date_of_birth;
-       $visitor_user->category=$request->category;
-       $visitor_user->age=$request->age;
-       $visitor_user->password=$request->password;
-       $visitor_user->mobile_number=$request->mobile_number;
-       $visitor_user->save();
-       return redirect('/visitor_user');
-
-
-       
-
+        );
+        $visitor_user = new VisitorUser;
+        $visitor_user->fname = $request->first_name;
+        $visitor_user->state = $request->state;
+        $visitor_user->date_of_birth = $request->date_of_birth;
+        $visitor_user->category = $request->category;
+        $visitor_user->age = $request->age;
+        $visitor_user->password = $request->password;
+        $visitor_user->mobile_number = $request->mobile_number;
+        $visitor_user->save();
+        return redirect('/visitor_user');
     }
 
     /**
@@ -90,11 +85,10 @@ class VisitorUserController extends Controller
      */
     public function edit($id)
     {
-        $state=State::select('name','id')->where('country_id',101)->get();
+        $state = State::select('name', 'id')->where('country_id', 101)->get();
         $visiter_users = DB::select('SELECT st.name,vs.fname,vs.state,vs.category,vs.mobile_number,vs.age,vs.id,vs.password,vs.date_of_birth FROM `visitor_users` vs , `states` st WHERE vs.state=st.id and vs.id = ?', [$id]);
-    //  dd($visiter_users);
-        return view('visitor_user.EditVisitorUser',['visiter_user'=>$visiter_users],['state'=>$state]);
-
+        //  dd($visiter_users);
+        return view('visitor_user.EditVisitorUser', ['visiter_user' => $visiter_users], ['state' => $state]);
     }
 
     /**
@@ -108,17 +102,16 @@ class VisitorUserController extends Controller
     {
         echo 'check';
 
-        $visitor_user= VisitorUser::find($id) ;
-        $visitor_user->fname=$request->first_name;
-        $visitor_user->state=$request->state;
-        $visitor_user->date_of_birth=$request->date_of_birth;
-        $visitor_user->category=$request->category;
-        $visitor_user->age=$request->age;
-        $visitor_user->password=$request->password;
-        $visitor_user->mobile_number=$request->mobile_number;
+        $visitor_user = VisitorUser::find($id);
+        $visitor_user->fname = $request->first_name;
+        $visitor_user->state = $request->state;
+        $visitor_user->date_of_birth = $request->date_of_birth;
+        $visitor_user->category = $request->category;
+        $visitor_user->age = $request->age;
+        $visitor_user->password = $request->password;
+        $visitor_user->mobile_number = $request->mobile_number;
         $visitor_user->save();
         return redirect('/visitor_user');
- 
     }
 
     /**
@@ -129,11 +122,8 @@ class VisitorUserController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
-  DB::delete('DELETE FROM visitor_users WHERE id = ?', [$id]);
-  echo ("User Record deleted successfully.");
-  return redirect('/visitor_user');
-
-
+        DB::delete('DELETE FROM visitor_users WHERE id = ?', [$id]);
+        echo ("User Record deleted successfully.");
+        return redirect('/visitor_user');
     }
 }
