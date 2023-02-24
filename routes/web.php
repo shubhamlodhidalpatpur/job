@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use App\Http\Controllers\VisitorUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 	Route::get('user',[UserController::class,'index'])->name('user'); 
 	Route::get('deleteUser/{id}',[UserController::class,'delete'])->name('deleteUser'); 
+	Route::get('visitor_user',[VisitorUserController::class,'index'])->name('visitor_user'); 
+	Route::get('addvisitor',[VisitorUserController::class,'create'])->name('addvisitor'); 
+	Route::post('addvisitoruser',[VisitorUserController::class,'store'])->name('addvisitoruser'); 
+	Route::get('destroyvisitoruser/{id}',[VisitorUserController::class,'destroy'])->name('destroyvisitoruser'); 
+	Route::get('editvisitoruser/{id}',[VisitorUserController::class,'edit'])->name('editvisitoruser'); 
+	Route::post('updatevisitoruser/{id}',[VisitorUserController::class,'update'])->name('updatevisitoruser'); 
 
 });
 

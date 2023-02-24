@@ -93,6 +93,11 @@
                     <i class="ni ni-pin-3 text-orange"></i> {{ __('User') }}
                 </a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('visitor_user') }}">
+                    <i class="ni ni-pin-3 text-orange"></i> {{ __('Visitor User') }}
+                </a>
+            </li>
 </ul>
         </div>
     </div>
