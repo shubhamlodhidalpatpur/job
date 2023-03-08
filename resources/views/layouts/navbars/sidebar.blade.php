@@ -85,17 +85,22 @@
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="{{ route('Jobpost') }}">
-                    <i class="ni ni-planet text-blue"></i> {{ __('Post Job') }}
+                    <i class="ni ni-single-copy-04 text-blue"></i> {{ __('Post Job') }}
                 </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="{{ route('user') }}">
-                    <i class="ni ni-pin-3 text-orange"></i> {{ __('User') }}
+                    <i class="ni ni-single-02 text-blue"></i> {{ __('User') }}
                 </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="{{ route('visitor_user') }}">
-                    <i class="ni ni-pin-3 text-orange"></i> {{ __('Visitor User') }}
+                    <i class="ni ni-circle-08 text-blue"></i> {{ __('Visitor User') }}
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('notes') }}">
+                    <i class="ni ni-hat-3 text-blue"></i> {{ __('Notes') }}
                 </a>
             </li>
 </ul>

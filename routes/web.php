@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\UserController;
@@ -40,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('Addpost',[PostJobController::class,'create'])->name('Addpost'); 
 	Route::post('addJobPost',[PostJobController::class,'store'])->name('addJobPost'); 
 	Route::get('editPostJob/{id}',[PostJobController::class,'edit'])->name('editPostJob'); 
+	Route::get('destroyPostJob/{id}',[PostJobController::class,'destroy'])->name('deletePostJob'); 
 	Route::post('UpdateJobPost/{id}',[PostJobController::class,'update'])->name('UpdateJobPost'); 
 	Route::post('UpdateAnnoucement',[PostJobController::class,'UpdateAnnoucement'])->name('UpdateAnnoucement'); 
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
@@ -51,6 +53,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('destroyvisitoruser/{id}',[VisitorUserController::class,'destroy'])->name('destroyvisitoruser'); 
 	Route::get('editvisitoruser/{id}',[VisitorUserController::class,'edit'])->name('editvisitoruser'); 
 	Route::post('updatevisitoruser/{id}',[VisitorUserController::class,'update'])->name('updatevisitoruser'); 
+	Route::get('notes',[NotesController::class,'index'])->name('notes'); 
+	Route::get('AddNotes',[NotesController::class,'create'])->name('AddNotes'); 
+	Route::post('AddNotes',[NotesController::class,'store'])->name('AddNotes'); 
+
 
 });
 

@@ -58,7 +58,7 @@ class PostJobController extends Controller
         $JobPost->eligibility=$request->education_eligibility;
         $JobPost->fee=$request->fee;
         $JobPost->notification_link=$request->notification_link;
-        $JobPost->apply_link=$request->apply_link;
+        $JobPost->apply_link=$request->Apply_link;
         $JobPost->no_of_vacancy=$request->no_of_vacancy;
         $JobPost->save();
         return redirect('/Jobpost');
@@ -128,7 +128,9 @@ class PostJobController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jobPost=PostJob::where('id',$id)->delete();
+        return redirect('/Jobpost')->with('message','Post Delete Successfully');
+
     }
     public function UpdateAnnoucement(Request $request){
         $annoucement = DB::table('post_annoucements')
