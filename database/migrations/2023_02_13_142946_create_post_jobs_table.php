@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('post_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('start_date')->nullable(true);
+            $table->date('start_date')->nullable(true);  
             $table->date('end_date')->nullable(true);
             $table->bigInteger('category_id')->nullable(true)->unsigned();
             $table->bigInteger('state_id')->nullable(true)->unsigned();

@@ -24,6 +24,15 @@ class PostJobController extends Controller
         return view('postjob.Postjob',compact('PostJob','post_annoucements'));
 
     }
+    public function FrontendIndex()
+    {
+        $post_annoucements = DB::table('post_annoucements')->get();
+        $PostJob=PostJob::leftjoin('categories','categories.id','post_jobs.category_id')
+        ->leftjoin('departments','departments.id','post_jobs.department_id')
+        ->leftjoin('states','states.id','post_jobs.state_id')->select('post_jobs.*','categories.title as category','departments.title as department','states.name as state')->get();
+        return view('welcome',compact('PostJob','post_annoucements'));
+
+    }
 
     /**
      * Show the form for creating a new resource.

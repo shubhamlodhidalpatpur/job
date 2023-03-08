@@ -5,7 +5,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Argon Dashboard') }}</title>
+    <title>{{ config('app.name') }}</title>
     <!-- Favicon -->
     <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
     <!-- Fonts -->
@@ -68,27 +68,7 @@
 <!-- Trigger the modal with a button -->
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-    <h4 class="modal-header">Update Annoucement</h4>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <form action="/UpdateAnnoucement" method="POST">
-        @csrf
-      <div class="modal-body">
-        <input type="text"  name="annoucement" class="form-control" value="{{$post_annoucements->annoucement}}">
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Update</button>
-      </div>
-      </form>
-    </div>
 
-  </div>
-</div>
 
             <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 <div class="container-fluid">
@@ -111,13 +91,10 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Post Job</h3>
+                            <h3 class="mb-0">Annoucement</h3>
                         </div>
                         <div class="col text-right">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Update Annoucement</button>
-                            </div>
-                        <div class="col text-right">
-                            <a href="{{ route('Addpost') }}" class="btn btn-sm btn-primary">Add Post Job</a>
+                            <a href="{{ route('AddPageAnnouncement') }}" class="btn btn-sm btn-primary">Add  Annoucement</a>
                         </div>
                     </div>
                 </div>
@@ -129,49 +106,31 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Category</th>
-                                <th scope="col">state</th>
-                                <th scope="col">department</th>
-                                <th scope="col">post name</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">end date</th>
-                                <th scope="col">Min Age</th>
-                                <th scope="col">Max Age</th>
-                                <th scope="col">education eligibility</th>
-                                <th scope="col">Fee</th>
-                                <th scope="col">notifaction Link</th>
-                                <th scope="col">apply link</th>
-                                <th scope="col">No. of vacancy</th>
-                                <th scope="col">action</th>
+                                <th scope="col">SR No.</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Link</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($PostJob as $Job)
+                      
+                        <tbody> 
+                        @foreach($Announcemnets as $announcemnet)
                             <tr>
-                                    <td>{{$Job->category}}</td>
-                                    <td>{{$Job->state}}</td>
-                                    <td>{{$Job->department}}</td>
-                                    <td>{{$Job->name}}</td>
-                                    <td>{{$Job->start_date}}</td>
-                                    <td>{{$Job->end_date}}</td>
-                                    <td>{{$Job->min_age}}</td>
-                                    <td>{{$Job->max_age}}</td>
-                                    <td>{{$Job->eligibility}}</td>
-                                    <td>{{$Job->fee}}</td>
-                                    <td><a href="{{$Job->notification_link}}" title="Notification Link" target="_blank">Notification Link</a></td>
-                                    <td><a href="{{$Job->apply_link}}" title="Apply Link" target="_blank">Apply Link</a></td>
-                                    <td>{{$Job->no_of_vacancy}}</td>
+                                    <td>{{$loop->index+1}}</td>
+                                    <td>{{$announcemnet->title}}</td>
+                                    <td>
+                                    <a href="{{$announcemnet->link}}" title="View" target="_blank">{{$announcemnet->link}}</a>
+                                    </td>
                                     <td><div class="action-link">
-                                            <a href="getPostjob/{{$Job->id}}" title="View"><i class="far fa-eye"></i></a>
-                                            <a href="editPostJob/{{$Job->id}}" title="Edit"><i class="far fa-edit"></i></a>
-                                            <a href="destroyPostJob/{{$Job->id}}" title="Delete"><i class="far fa-trash-alt"></i></a>
+                                            <a href="getPostjob/{{$announcemnet->id}}" title="View"><i class="far fa-eye"></i></a>
+                                            <!-- <a href="editPostJob/{{$announcemnet->id}}" title="Edit"><i class="far fa-edit"></i></a> -->
+                                            <a href="deleteannouncemnet/{{$announcemnet->id}}" title="Delete"><i class="far fa-trash-alt"></i></a>
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @endforeach 
+
                         </tbody>
                     </table>
-                    {{ $PostJob->onEachSide(5)->links() }}
                 </div>
                 <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">

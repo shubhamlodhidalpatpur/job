@@ -6,6 +6,8 @@ use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Http\Controllers\VisitorUserController;
+use App\Http\Controllers\AnnouncementController;
+
 
 
 /*
@@ -22,7 +24,7 @@ use App\Http\Controllers\VisitorUserController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/',[PostJobController::class,'FrontendIndex'])->name('FrontendIndex'); 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -56,6 +58,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('notes',[NotesController::class,'index'])->name('notes'); 
 	Route::get('AddNotes',[NotesController::class,'create'])->name('AddNotes'); 
 	Route::post('AddNotes',[NotesController::class,'store'])->name('AddNotes'); 
+	Route::get('Announcement',[AnnouncementController::class,'index'])->name('Announcement'); 
+	Route::get('AddPageAnnouncement',[AnnouncementController::class,'create'])->name('AddPageAnnouncement'); 
+	Route::post('StoreAnnouncement',[AnnouncementController::class,'store'])->name('AddAnnouncement'); 
+	Route::get('deleteannouncemnet/{id}',[AnnouncementController::class,'destroy'])->name('deleteannouncemnet'); 
+
 
 
 });

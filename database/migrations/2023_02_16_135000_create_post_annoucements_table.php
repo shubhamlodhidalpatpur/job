@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('post_annoucements', function (Blueprint $table) {
             $table->id();
-            $table->string('annoucement');
+            $table->string('title');
+            $table->string('link');
             $table->timestamps();
         });
     }
