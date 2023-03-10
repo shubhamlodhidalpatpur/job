@@ -108,6 +108,11 @@
                     <i class="ni ni-hat-3 text-blue"></i> {{ __('Announcement') }}
                 </a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('admidCard') }}">
+                    <i class="ni ni-hat-3 text-blue"></i> {{ __('Admit Card') }}
+                </a>
+            </li>
 </ul>
         </div>
     </div>

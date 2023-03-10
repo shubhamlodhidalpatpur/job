@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('post_jobs', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->autoIncrement();
             $table->string('name');
             $table->date('start_date')->nullable(true);  
             $table->date('end_date')->nullable(true);

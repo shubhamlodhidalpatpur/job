@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Http\Controllers\VisitorUserController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\AdmitCardController;
+
 
 
 
@@ -31,6 +33,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('registerto',[VisitorUserController::class,'login'])->name('registerto');
+Route::get('loginTo',[VisitorUserController::class,'loginPage'])->name('loginTo');
+Route::post('createAccount',[VisitorUserController::class,'Regiterstore'])->name('createAccount');
+Route::post('LoginPage',[VisitorUserController::class,'loginUser'])->name('LoginPage');
+Route::get('resultlist',[AdmitCardController::class,'listing'])->name('resultlist');
+
+
+
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
@@ -62,6 +72,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('AddPageAnnouncement',[AnnouncementController::class,'create'])->name('AddPageAnnouncement'); 
 	Route::post('StoreAnnouncement',[AnnouncementController::class,'store'])->name('AddAnnouncement'); 
 	Route::get('deleteannouncemnet/{id}',[AnnouncementController::class,'destroy'])->name('deleteannouncemnet'); 
+	Route::get('admidCard',[AdmitCardController::class,'index'])->name('admidCard'); 
+	Route::get('Addresult',[AdmitCardController::class,'create'])->name('Addresult'); 
+	Route::post('AddResult',[AdmitCardController::class,'store'])->name('AddResult'); 
+	Route::get('deleteResult/{id}',[AdmitCardController::class,'destroy'])->name('deleteResult'); 
+
+
+
+
 
 
 

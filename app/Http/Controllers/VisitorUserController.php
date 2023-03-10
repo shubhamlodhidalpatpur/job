@@ -21,7 +21,7 @@ class VisitorUserController extends Controller
         $visiter_users = DB::select('SELECT st.name,vs.fname,vs.state,vs.category,vs.mobile_number,vs.age,vs.id FROM `visitor_users` vs , `states` st WHERE vs.state=st.id');
         return view('visitor_user.VisitorUser', ['visiter_user' => $visiter_users]);
     }
-
+  
     /**
      * Show the form for creating a new resource.
      *
@@ -125,5 +125,73 @@ class VisitorUserController extends Controller
         DB::delete('DELETE FROM visitor_users WHERE id = ?', [$id]);
         echo ("User Record deleted successfully.");
         return redirect('/visitor_user');
+    }
+
+
+
+
+    // user login
+    public function login()
+    {
+        return view('Register.register');
+    }
+    public function loginPage()
+    {
+        return view('Register.login');
+    }
+
+    public function loginUser(Request $request)
+    {
+        $request->validate(
+            [
+                'phone' => 'required',
+                'password' => 'required',
+               
+
+            ]
+        );
+      
+          $user = VisitorUser::where('mobile_number', $request->phone)
+          ->first();
+            if ($user->mobile_number==$request->phone) {
+               
+                if ($request->password== $user->password) {
+      
+                  
+                    return redirect('/');
+                     } else {
+                     $response = ["message" => "Password mismatch"];
+                     
+                     return response($response, 422);
+                     }
+                    }
+        return view('Register.login');
+    }
+            
+        
+    public function Regiterstore(Request $request)
+    {
+        $request->validate(
+            [
+                'full_name' => 'required',
+                'password' => 'required',
+                // 'state' => 'required',
+                'date_of_birth' => 'required',
+                // 'age' => 'required',
+                'category' => 'required',
+                'mobile_number' => 'required | max:10'
+
+            ]
+        );
+        $visitor_user = new VisitorUser;
+        $visitor_user->fname = $request->full_name;
+        // $visitor_user->state = $request->state;
+        $visitor_user->date_of_birth = $request->date_of_birth;
+        $visitor_user->category = $request->category;
+        // $visitor_user->age = $request->age;
+        $visitor_user->password = $request->password;
+        $visitor_user->mobile_number = $request->mobile_number;
+        $visitor_user->save();
+        return view('Register.login');
     }
 }
