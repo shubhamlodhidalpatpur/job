@@ -139,7 +139,7 @@ class VisitorUserController extends Controller
     {
         return view('Register.login');
     }
-
+// login frount
     public function loginUser(Request $request)
     {
         $request->validate(
@@ -160,7 +160,8 @@ class VisitorUserController extends Controller
                   
                     return redirect('/');
                      } else {
-                     $response = ["message" => "Password mismatch"];
+                        return view('Register.login');
+                    //  $response = ["message" => "Password mismatch"];
                      
                      return response($response, 422);
                      }
